@@ -1,3 +1,4 @@
 class Order < ApplicationRecord
-  has_many :services, dependent: :destroy
+  belongs_to :service
+  validates :customers_name, presence: true
 end

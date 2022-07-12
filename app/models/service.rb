@@ -1,5 +1,7 @@
 class Service < ApplicationRecord
-  belongs_to :order
+  has_many :orders
   has_one :executor
-  has_many :categories, dependent: :destroy
+  has_many :categories
+
+  validates :service_name, presence: true
 end
