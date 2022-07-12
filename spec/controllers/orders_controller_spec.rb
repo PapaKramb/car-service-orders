@@ -32,10 +32,6 @@ RSpec.describe OrdersController, type: :controller do
     it 'renders new view' do
       expect(response).to render_template :new
     end
-
-    # it 'assings a new order' do
-    #   expect(assigns(:order).links.first).to be_a_new(Link)
-    # end
   end
 
   describe 'GET #edit' do
