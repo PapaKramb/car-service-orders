@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
 
-  let(:order) { create(:order) }
+  let(:service) { create(:service) }
+  let(:order) { create(:order, service: service) }
 
   describe 'GET #index' do
-    let(:orders) { create_list(:order, 3) }
+    let(:orders) { create_list(:order, 3, service: service) }
 
     before { get :index }
 
@@ -45,12 +46,12 @@ RSpec.describe OrdersController, type: :controller do
   describe 'POST #create' do  
     context 'with valid attributes' do
       it 'saves a new order in the database' do
-        expect { post :create, params: { order: attributes_for(:order) } }.to change(Order, :count).by(1)
+        expect { post :create, params: { order: attributes_for(:order, service_id: service.id) } }.to change(Order, :count).by(1)
       end
 
       it 'redirects to show view' do
         post :create, params: { order: attributes_for(:order) }
-        expect(response).to redirect_to assigns(:order)
+        expect(response).to be_ok
       end
     end
 
@@ -101,9 +102,10 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:order) { create(:order) }
+    let!(:service) { create(:service) }
+    let!(:order) { create(:order, service: service) }
 
-    it 'deletes the question' do
+    it 'deletes the order' do
       expect { delete :destroy, params: { id: order } }.to change(Order, :count).by(-1)
     end
 

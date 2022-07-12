@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2022_07_12_062629) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_name"
-    t.bigint "service_id", null: false
+    t.bigint "service_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["service_id"], name: "index_categories_on_service_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2022_07_12_062629) do
 
   create_table "executors", force: :cascade do |t|
     t.string "name"
-    t.bigint "service_id", null: false
+    t.bigint "service_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["service_id"], name: "index_executors_on_service_id"
